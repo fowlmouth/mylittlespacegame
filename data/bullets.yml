@@ -1,0 +1,423 @@
+:grapple_hook:
+  :special:
+    :trigger_event: :asteroid_hook
+  :timer: 10000
+  :fade: 100
+  :speed: 28.4
+  :img: bullets/omaser_24x24.png
+  :size: [24, 24]
+  :delay: 60
+  :mass: 0.5
+  :trail:
+    :file: doors/EnergyDoorVert2.png
+    :size: [16, 64]
+    :range: 0..15
+    :delay: 64
+    :timer: 10
+  :damage:
+    :asteroid: 0
+    :health: 4
+    :energy: 200
+  :scale: 0.8
+:bolt:
+  :timer: 6000
+  :fade: 30
+  :speed: 1
+  :absolute_velocity: 90
+  :img: bullets/omaser_24x24.png
+  :size: [24, 24]
+  :delay: 60
+  :mass: 0.5
+  :trail: 
+    :file: bullets/EbeamTrail_32x32.png
+    :size: [32, 32]
+    :delay: 4
+    :timer: 30
+  :bounding_circle_scale: 0.1
+  :elasticity: 0.7
+  :scale: 0.8
+  :damage: 
+    :energy: 400
+    :health: 2
+
+:neutron_bomb:
+  :timer: 8000
+  :fade: 70
+#  :speed: 6.4
+  :speed: 25.9
+  :img: bullets/EnergyBombD2_24x24.png
+  :size: [24, 24]
+  :delay: 40
+  :radius: 8
+  :prox:
+    :delay: 500
+    :radius: 23
+  :damage: 
+    :asteroid: 25
+    :energy: 250
+    :health: 4.1
+  :explode: 
+    :sound: ebomb3.wav
+    :image: explosions/laserHit2_64x64.png
+    :delay: 10
+  :trail:
+    :file: bullets/EBombTrail_20x20.png
+    :delay: 70
+    :timer: 100
+
+:bio_bomb:
+  :timer: 8000
+  :speed: 26.7
+  :img: bullets/EBombTumbleXYE_YELLOW_24x24.png
+  :size: [24, 24]
+  :delay: 40
+  :radius: 8
+  :prox:
+    :delay: 500
+    :radius: 24
+  :damage:
+    :asteroid: 23
+    :energy: 300
+    :health: 4.2
+  :explode:
+    :sound: ebomb3.wav
+    :image: explosions/bombHit0_36x36.png
+    :delay: 7
+  :trail:
+    :file: bullets/EBombTrail_YELLOW_20x20.png
+    :delay: 70
+    :timer: 110
+
+:bio_mine_idle:
+  :timer: 17000
+  :speed: 0.2
+  :absolute_velocity: 1.2
+  :img: bullets/SkithzarMine_32x32.png
+  :size: [32, 32]
+  :delay: 45
+  :radius: 10
+  :prox:
+    :delay: 500
+    :radius: 18
+  :damage:
+    :asteroid: 23
+    :energy: 330
+    :health: 3.5
+  :explode:
+    :sound:
+    :image:
+    :delay:
+
+
+:bio_cannon:
+  :timer: 6000
+  :fade: 70
+#  :speed: 6.4
+  :speed: 25.9
+  :dmg: 4
+  :img: bullets/EbulletA_12x12.png
+  :size: [12, 12]
+  :delay: 40
+  :bounding_circle_scale: 0.4
+  :damage: 
+    :energy: 250
+    :health: 3.6
+  :explode: 
+    :sound: explode0.wav
+    :image: explosions/bombHit0_18x18.png
+    :delay: 5
+  :trail:
+    :file: bullets/bullettrail2_12x12.png
+    :delay: 40
+    :timer: 110
+
+:molt_rocks:
+  :timer: 5000
+  :fade: 70
+  :speed: 8
+  :img: bullets/MoltorRockHuge_gray_40x40.png
+  :size: [40, 40]
+  :delay: 40
+  :radius: 18
+  :damage: 
+    :asteroid: 25
+    :energy: 250
+    :health: 3.6
+  :explode: 
+    :sound: ebomb3.wav
+    :image: explosions/bombhit3_24x24.png
+    :delay: 10
+  :trail:
+    :file: bullets/MoltorRockHugeTrail_gray_40x40.png
+    :delay: 70
+    :timer: 100
+
+:bio_missile:
+  :timer: 2500
+  :fade: 80
+  :speed: 29.4
+  :img: bullets/BioMissile_42x42.png
+  :size: [42, 42]
+  :rot_points: 64
+  :radius: 20
+  :prox:
+    :delay: 500
+    :radius: 25
+  :rotation:
+    :timer: 25
+    :during: 1000
+    :delay: 50
+    :turn: 12.5
+  :damage:
+    :asteroid: 4
+    :energy: 300
+    :health: 7.2
+  :explode:
+    :sound: EnergyWeaponA.wav
+  :trail:
+    :file: bullets/contrail_16x16.png
+    :delay: 50
+    :timer: 70
+    :color: :GREEN
+
+:double_laser:
+  :timer: 4000
+  :speed: 50
+  :img: bullets/rt_proj_plasma_trail_RAISED_24x24.png
+  :size: [24, 24]
+  :radius: 8
+  :delay: 30
+  :trail: 
+    :file: bullets/rt_proj_plasma_trail_ONE_24x24.png
+    :delay: 30
+    :timer: 15
+  :damage: 
+    :energy: 400
+    :health: 2
+    :asteroid: 100
+
+:pewpew:
+  :timer: 6000
+  :fade: 80
+  :speed: 29
+  :img: bullets/GraziBombB_24x24.png
+  :size: [24, 24]
+  :radius: 12
+  :prox:
+    :delay: 500
+    :radius: 15
+  :damage:
+    :asteroid: 4
+    :energy: 300
+    :health: 7.2
+  :explode:
+    :sound: EnergyWeaponA.wav
+    :fire: nil
+  :trail:
+    :file: bullets/contrail_16x16.png
+    :delay: 50
+    :timer: 250
+
+:laserSM:
+  :timer: 4500
+  :fade: 30
+  :speed: 1
+  :absolute_velocity: 83
+  :img: bullets/BeamTrailXSML_ONE_16x16.png
+  :size: [16, 16]
+  :delay: 60
+  :trail: 
+    :file: bullets/BeamTrailXSML_ONE_16x16.png
+#    :size: [16, 16]
+    :delay: 2
+    :timer: 15
+  :damage: 
+    :energy: 400
+    :health: 2
+    :asteroid: 100
+
+:laserMDM:
+  :timer: 4700
+  :fade: 30
+  :speed: 1
+  :absolute_velocity: 80
+  :img: bullets/BeamTrailMDM_ONE_36x36.png
+  :size: [36, 36]
+  :delay: 60
+  :trail: 
+    :file: bullets/BeamTrailXSML_ONE_16x16.png
+#    :size: [36]
+    :delay: 2
+    :timer: 15
+  :bounding_circle_scale: 0.1
+  :elasticity: 0.7
+  :scale: 0.8
+  :damage: 
+    :energy: 400
+    :health: 2
+    :asteroid: 100
+    
+:laserLG:
+  :timer: 4500
+  :fade: 30
+  :speed: 1
+  :absolute_velocity: 90
+  :img: bullets/BeamLarge_48x48.png
+  :size: [48, 48]
+  :rot_points: 64
+  :radius: 4
+  :delay: 60
+  :trail: 
+    :file: bullets/BeamTrail_ONE_48x48.png
+    :delay: 80
+    :timer: 15
+  :damage: 
+    :energy: 400
+    :health: 2
+    :asteroid: 100
+    :status:
+      - :STALL
+      - 20     # 20 is about a third of a second at 60 FPS (I think?)
+  :explode: 
+    :sound: ebomb3.wav
+    :image: explosions/laserHit2_64x64.png
+    :delay: 10
+
+
+:bulletA:
+  :timer: 4000
+  :fade: 70
+#  :speed: 6.4
+  :speed: 25.9
+  :dmg: 4
+  :img: bullets/EbulletA_12x12.png
+  :size: [12, 12]
+  :delay: 40
+  :bounding_circle_scale: 0.4
+  :damage: 
+    :energy: 250
+    :health: 3.6
+  :explode: 
+    :sound: explode0.wav
+    :image: explosions/bombHit0_18x18.png
+    :delay: 5
+  :trail:
+    :file: bullets/bullettrail2_12x12.png
+    :delay: 40
+    :timer: 110
+    
+:bulletB:
+  :timer: 4000
+  :fade: 70
+  :speed: 25.9
+  :dmg: 4
+  :img: bullets/MoltorRock_24x24.png
+  :size: [24, 24]
+  :delay: 40
+  :bounding_circle_scale: 0.4
+  :damage: 
+    :energy: 250
+    :health: 3.6
+  :explode: 
+    :sound: explode0.wav
+    :image: explosions/bombHit0_18x18.png
+    :delay: 5
+  :trail:
+    :file: bullets/MoltorRockTrail_24x24.png
+    :delay: 40
+    :timer: 110
+
+:mass_driver:
+  :timer: 4000
+  :speed: 15
+  :mass: 30
+  :img: bullets/MassDriver_14x14.png
+  :size: [14, 14]
+  :rot_points: 64
+  :radius: 1
+  :damage:
+    :energy: 220
+    :health: 3.1
+    :asteroid: 2
+  :explode:
+    :sound: explode0.wav
+    :image: bullets/EBulletHit_32x32.png
+    :delay: 5
+  :trail:
+    :file: bullets/bullettrail2_gray_12x12.png
+    :delay: 90
+    :timer: 90
+    :color: :GREEN
+
+:plasma_pulse:
+  :timer: 5000
+  :speed: 26.7
+  :img: bullets/EnergyBombA_grayC_24x24.png
+  :size: [24, 24]
+  :color: :BLUE
+  :delay: 40
+  :radius: 8
+  :prox:
+    :delay: 500
+    :radius: 24
+  :damage:
+    :asteroid: 23
+    :energy: 300
+    :health: 4.2
+    :emp: 1500
+  :explode:
+    :sound: ebomb3.wav
+    :image: explosions/laserHit_72x72.png
+    :delay: 7
+    :status:
+      - :EMP
+      - 10  # Freeze energy regen 10 energy cycles
+  :trail:
+    :file: bullets/EBombTrail_gray_20x20.png
+    :delay: 70
+    :timer: 110
+    :color: :BLUE
+
+:fusion_bomb:
+  :timer: 8000
+  :speed: 29.4
+  :img: bullets/EBombTumbleXYE_24x24.png
+  :size: [24, 24]
+  :delay: 40
+  :radius: 8
+  :prox:
+    :delay: 500
+    :radius: 24
+  :damage:
+    :asteroid: 23
+    :energy: 300
+    :health: 4.2
+  :explode:
+    :sound: ebomb3.wav
+    :image: explosions/bombHit0_36x36.png
+    :delay: 7
+  :trail:
+    :file: bullets/EBombTrail_gray_20x20.png
+    :color: :RED
+    :delay: 70
+    :timer: 110
+
+### SPECIAL BULLETS 
+
+:debrisA:
+  :timer: 4000
+  :fade: 70
+#  :speed: 6.4
+  :speed: 25.9
+  :dmg: 4
+  :img: bullets/EbulletA_12x12.png
+  :size: [12, 12]
+  :delay: 40
+  :bounding_circle_scale: 0.4
+  :damage: 
+    :energy: 250
+    :health: 3.6
+  :explode: 
+    :sound: explode0.wav
+    :image: explosions/bombHit0_18x18.png
+    :delay: 5

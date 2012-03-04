@@ -1,0 +1,358 @@
+:Masta:
+  :name: Masta
+  :img: ships/skith/Mastakith_54x54.png
+  :size: [54, 54]
+  :roll: yes
+  :armor: 100
+  :energy: 1700
+  :rotation_points: 64
+  :radius: 23
+  :slots:
+    - :type: :cannon
+      :offs: [30, 0]
+    - :type: :bomb
+      :offs: [30, 0]
+    - :type: :defense
+      :offs: [-30, 0]
+    - :type: :extra    #at this point I realized I should just default the offest to the first slot. that makes sense at this point in time to me...
+    - :type: :extra    #these are extra keys a,s,d
+    - :type: :extra
+  :weapons:
+    - :bio_cannon
+    - :bio_bomb
+    - :bio_mine
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs:
+      - [-30, 0]
+:Skithist:
+  :name: Skithist
+  :img: ships/skith/Skithist_54x54.png
+  :size: [54, 54]
+  :roll: yes
+  :armor: 100
+  :energy: 1700
+  :rotation_points: 64
+  :radius: 23
+  :slots:
+    - :type: :cannon
+      :offs: [30, 0]
+    - :type: :bomb
+      :offs: [30, 0]
+    - :type: :defense
+      :offs: [30, 0]
+  :weapons:
+    - :bio_cannon    # :dual_bio_cannon
+    - :bio_bomb
+    - :bio_mine
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs:
+      - [-30, 5]
+      - [-30, -5]
+:Kragath:
+  :name: Kragath
+  :img: ships/skith/Kragath_54x54.png
+  :size: [54, 54]
+  :roll: yes
+  :armor: 100
+  :energy: 1700
+  :rotation_points: 64
+  :radius: 23
+  :slots:
+    - :type: :cannon
+      :offs: [30, 0]
+    - :type: :bomb
+      :offs: [30, 0]
+    - :type: :defense
+      :offs: [30, 0]
+  :weapons:
+    - :bio_cannon
+    - :bio_bomb
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs:
+      - [-30, 0]
+:Tarthist:
+  :name: Tarthist
+  :img: ships/skith/Tarthist_54x54.png
+  :size: [54, 54]
+  :roll: yes
+  :armor: 100
+  :energy: 1700
+  :rotation_points: 64
+  :radius: 23
+  :slots:
+    - :type: :cannon
+      :offs: [30, 0]
+    - :type: :bomb
+      :offs: [30, 0]
+    - :type: :defense
+      :offs: [30, 0]
+  :weapons:
+    - :bio_cannon
+    - :bio_bomb
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs:
+      - [-30, 0]
+
+:Asp:
+  :name: Asp
+  :img: ships/terran/Asp_54x54.png
+  :rotation_points: 64
+  :size: [54, 54]
+  :roll: TRUE
+  :armor: 100
+  :energy: 1700
+  :radius: 23
+  :slots: 
+  - :type: :cannon
+    :offs: [30, 0]
+  - :type: :bomb
+    :offs: [30, 0]
+  :weapons:
+  - :mass_driver
+  - :plasma_pulse
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs: 
+      - [-30, 0]
+:Excelsior:
+  :name: Excelsior
+  :img: ships/terran/Excelsior_54x54.png
+  :rotation_points: 64
+  :size: [54, 54]
+  :roll: TRUE
+  :armor: 100
+  :energy: 1700
+  :radius: 23
+  :slots: 
+  - :type: :cannon
+    :offs: [30, 0]
+  - :type: :bomb
+    :offs: [30, 0]
+  :weapons:
+  - :mass_driver   # dual_mass_driver
+  - :fusion_bomb
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs: 
+      - [-20, 15]
+      - [-20, -15]
+:Hornet:
+  :name: Hornet
+  :img: ships/terran/hornet_54x54.png
+  :rotation_points: 64
+  :size: [54, 54]
+  :roll: TRUE
+  :armor: 100
+  :energy: 1700
+  :radius: 23
+  :slots: 
+  - :type: :cannon
+    :offs: [30, 0]
+  - :type: :bomb
+    :offs: [30, 0]
+  - :type: :defense
+    :offs: [-30, 0]
+  - :type: :extra
+  - :type: :extra
+  - :type: :extra
+  :weapons:
+  - :mass_driver
+  - :fusion_bomb
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs: 
+      - [-30, 0]
+:Ravager:
+  :name: Ravager
+  :img: ships/terran/Ravager_54x54.png
+  :rotation_points: 64
+  :size: [54, 54]
+  :roll: TRUE
+  :armor: 100
+  :energy: 1700
+  :radius: 23
+  :slots: 
+  - :type: :cannon
+    :offs: [30, 0]
+  - :type: :bomb
+    :offs: [30, 0]
+  :weapons:
+  - :meson_cannon
+  - :meson_bomb
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs: 
+      - [-20, 15]
+      - [-20, -15]
+
+:Zag:
+  :name: Zaggir
+  :img: ships/grazi/zaggir_54x54.png
+  :rotation_points: 64
+  :size: [54, 54]
+  :roll: yes
+  :armor: 100
+  :energy: 1700
+  :radius: 23
+  :slots: 
+  - :type: :cannon
+    :offs: [30, 0]
+  - :type: :bomb
+    :offs: [30, 0]
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs: 
+      - [-30, 0]
+:Rak:
+  :name: Rakkir
+  :img: ships/grazi/rakkir_54x54.png
+  :rotation_points: 64
+  :size: [54, 54]
+  :roll: yes
+  :armor: 100
+  :energy: 1700
+  :radius: 23
+  :slots: 
+  - :type: :cannon
+    :offs: [30, 0]
+  - :type: :bomb
+    :offs: [30, 0]
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs: 
+      - [-30, 0]
+:Zap:
+  :name: Zappir
+  :img: ships/grazi/zappir_54x54.png
+  :rotation_points: 64
+  :size: [54, 54]
+  :roll: yes
+  :armor: 100
+  :energy: 1700
+  :radius: 23
+  :slots: 
+  - :type: :cannon
+    :offs: [30, 0]
+  - :type: :bomb
+    :offs: [30, 0]
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs: 
+      - [-30, 0]
+:Rip:
+  :name: Rippir
+  :img: ships/grazi/rippir_54x54.png
+  :rotation_points: 64
+  :size: [54, 54]
+  :roll: yes
+  :armor: 100
+  :energy: 1700
+  :radius: 23
+  :slots: 
+  - :type: :cannon
+    :offs: [30, 0]
+  - :type: :bomb
+    :offs: [30, 0]
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
+    :offs: 
+      - [-30, 0]
+
+:Reaver: 
+  :img: ships/nCloaker_noroll60_54x54.png
+  :size: [54, 54]
+  :armor: 100
+  :energy: 1700
+  :name: Masta
+  :rotation_points: 64
+  :radius: 23
+  :slots:
+    - :type: :cannon
+      :offs: [30, 40]
+    - :type: :bomb
+      :offs: [30, -40]
+    - :type: :defense
+      :offs: [30, 40]
+  :thrust:
+    :timer: 5
+    :file: thrust3_16x16.png
+    :delay: 5
+    :offs: 
+      - [-30, 0]
+
+:Turret0: 
+  :img: ships/turrets/turret0_61x61.png
+  :size: [61, 61]
+  :armor: 100
+  :energy: 1700
+  :name: Turret0
+  :scale: 1.0
+  :radius: 20
+  :rotation_points: 64
+  :slots: 
+  - :type: :weapon
+    :offs: [18, 0]
+:EyeBot: 
+  :img: ships/turrets/eye_144x144.png
+  :size: [144, 144]
+  :lock_col: 1
+  :armor: 500
+  :energy: 2300
+  :name: EyeBot
+  :scale: 1.0
+  :radius: 60
+  :rotation_points: 64
+  :slots: 
+  - :type: :weapon
+    :offs: [90, 0]
+  :weapons:
+  - :deathbeam
+:DefSat: 
+  :img: ships/turrets/DefSat_54x54.png
+  :size: [54, 54]
+  :armor: 75
+  :energy: 1700
+  :name: Defensive Satellite
+  :radius: 20
+  :rotation_points: 64
+  :slots: 
+  - :type: :weapon
+    :offs: [70, 0]
+  :weapons:
+  - :small_laser
+:Base0: 
+  :img: ships/turrets/repairStationV0_128x128.png
+  :name: Base
+  :size: [128, 128]
+  :delay: 90
+  :armor: 500
+  :energy: 2000
+  :slots: []

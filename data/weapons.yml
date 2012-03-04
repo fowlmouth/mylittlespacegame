@@ -1,0 +1,217 @@
+
+:grapple_hook:
+  :bullet: :grapple_hook
+  :cooldown: 175
+  :energy_cost: 350
+  :name: Grappling Hook
+  :fire_sound: bomb5.wav
+  :range: 600
+  :optimal_range: 400
+
+:nbomb:
+  :bullet: :neutronBomb
+  :cooldown: 175
+  :energy_cost: 350
+  :name: Neutron Bomb
+  :fire_sound: bomb5.wav
+  :range: 600
+  :optimal_range: 400
+:double_laser:
+  :bullet: :double_laser
+  :cooldown: 20
+  :rounds: 3
+  :reload: 80
+  :energy_cost: 350
+  :name: Neutron Bomb
+  :fire_sound: bomb5.wav
+  :range: 600
+  :optimal_range: 400
+
+:moltor_rocks:
+  :bullet: :molt_rocks
+  :cooldown: 75
+  :energy_cost: 350
+  :name: Neutron Bomb
+  :fire_sound: bomb5.wav
+  :range: 600
+  :optimal_range: 400
+
+:wake_caster:    #NOT DONE
+  :bullet: :floaty
+  :cooldown: 60
+  :energy_cost: 220
+  :name: Wake Caster
+  :fire_sound: gun1.wav
+
+:mass_driver:
+  :bullet: :mass_driver
+  :type: :cannon
+  :cooldown: 22
+  :energy_cost: 150
+  :name: Mass Driver
+  :fire_sound: gun5.wav
+:plasma_pulse:
+  :bullet: :plasma_pulse
+  :type: :bomb
+  :cooldown: 180
+  :energy_cost: 350
+  :name: Plasma Pulse
+  :fire_sound: gun2.wav
+:dual_mass_driver:
+  :bullet: :mass_driver
+  :type: :cannon
+  :cooldown: 35
+  :rounds: 3
+  :reload: 140
+  :energy_cost: 180
+  :name: Mass Driver
+  :fire_sound: gun1.wav
+  :multi: 2               #NOTDONE
+:fusion_bomb:
+  :bullet: :fusion_bomb   #NOTDONE
+  :type: :bomb
+  :cooldown: 175
+  :energy_cost: 350
+  :name: Bio Bomb
+  :fire_sound: bomb2.wav
+  :range: 600
+  :optimal_range: 400
+:meson_cannon:
+  :bullet: :mass_driver
+  :type: :cannon
+  :cooldown: 45
+  :rounds: 3
+  :reload: 150
+  :energy_cost: 180
+  :name: Mass Driver
+  :fire_sound: bomb1.wav
+:meson_bomb:
+  :bullet: :mass_driver
+  :type: :bomb
+  :cooldown: 190
+  :energy_cost: 180
+  :name: Mass Driver
+  :fire_sound: bomb1.wav
+
+:d_cannon:
+  :bullet: :d_cannon
+  :type: :cannon
+  :cooldown: 23
+  :energy_cost: 150
+  :name: Mass Driver
+  :fire_sound: bomb1.wav
+:gravitic_bomb:
+  :bullet: :gravitic_bomb
+  :type: :bomb
+  :cooldown: 190
+  :energy_cost: 180
+  :name: Mass Driver
+  :fire_sound: bomb1.wav
+
+:bio_missile:
+  :bullet: :bio_missile
+  :cooldown: 100
+  :energy_cost: 400
+  :name: Bio Missile
+  :fire_sound: ScytheBomb.wav
+  :range: 600
+  :optimal_range: 400
+:bio_bomb:
+  :bullet: :bio_bomb
+  :type: :bomb
+  :cooldown: 175
+  :energy_cost: 350
+  :name: Bio Bomb
+  :fire_sound: bomb5.wav
+  :range: 600
+  :optimal_range: 400
+:bio_cannon:
+  :bullet: :bio_cannon
+  :type: :cannon
+  :cooldown: 22
+  :energy_cost: 160
+  :price: 200
+  :recoil: 0.02
+  :fire_sound: gun3.wav
+  :range: 200
+  :optimal_range: 120
+:bio_mine: #stationary bomb
+  :bullet: :bio_mine_idle
+  :type: :defense
+  :cooldown: 150
+  :energy_cost: 330
+  :name: Bio Mine
+  :fire_sound: 2/mine3.wav
+  
+
+# NOT FINISHED vvv
+:d_cannon:
+  :bullet: :bolt
+  :cooldown: 11
+  :energy_cost: 160
+  :name: Bolt Cannon
+  :fire_sound: gun2.wav
+  :range: 200
+  :optimal_range: 120
+:gravitic_bomb:
+  :bullet: :bolt
+  :cooldown: 11
+  :energy_cost: 160
+  :name: Bolt Cannon
+  :fire_sound: gun2.wav
+  :range: 200
+  :optimal_range: 120
+
+
+:pewpew:
+  :bullet: :pewpew
+  :cooldown: 120
+  :energy_cost: 350
+  :name: Pewpewpew
+  :fire_sound: ebomb4.wav
+  :range: 600
+  :optimal_range: 500
+:bolt_cannon:
+  :bullet: :bolt
+  :cooldown: 11
+  :energy_cost: 160
+  :name: Bolt Cannon
+  :fire_sound: gun2.wav
+  :range: 200
+  :optimal_range: 120
+:laserSM:
+  :type: :cannon
+  :bullet: :laserSM
+  :fire_angle: 0
+  :cooldown: 80
+  :energy_cost: 250
+  :name: Laser
+  :fire_sound: EnergyWeaponB.wav
+  :range: 200
+  :optimal_range: 120
+:laserMDM:
+  :type: :cannon
+  :bullet: :laserMDM
+  :fire_angle: 0
+  :cooldown: 110
+  :energy_cost: 570
+  :name: Laser
+  :fire_sound: EnergyWeaponB.wav
+  :range: 200
+  :optimal_range: 120
+:laserLG:
+  :bullet: :laserLG
+  :cooldown: 140
+  :energy_cost: 600
+  :name: Laser
+  :fire_sound: EnergyWeaponB.wav
+  :range: 200
+  :optimal_range: 120
+:deathbeam:
+  :bullet: :laserLG
+  :cooldown: 200
+  :energy_cost: 370
+  :name: DeathBeam
+  :fire_sound: EnergyWeaponB.wav
+  :range: 800
+  :optimal_range: 600

@@ -1,0 +1,36 @@
+controls:
+  accel: up
+  decel: down
+  turn_left: left
+  turn_right: right
+  strafe_left: z
+  strafe_right: x
+  boost: left_shift
+  shoot0: lctrl
+  shoot1: tab
+  shoot2: q
+  shoot3: a
+  shoot4: s
+  shoot5: d
+  detach: f
+mac:
+  accel: up
+  decel: down
+  turn_left: left
+  turn_right: right
+  strafe_left: z
+  strafe_right: x
+  boost: left_shift
+  shoot0: space
+  shoot1: c
+  shoot2: v
+  shoot3: a
+  shoot4: s
+  shoot5: d
+  detach: f
+
+# 
+:chingu:
+  :togglable:            # apparently this is a valid spelling: http://en.wiktionary.org/wiki/togglable
+    - [boost, unboost]   # will be put in as :left_shift => :boost and :released_left_shift => :unboost
+    
