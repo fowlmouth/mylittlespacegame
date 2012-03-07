@@ -1,0 +1,4 @@
+screen_size:  #size of the window x/y
+  - 1400 
+  - 960  
+controls: windows  #refer to controls.yml to customize
