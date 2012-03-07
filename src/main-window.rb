@@ -1,13 +1,11 @@
 module SpaceGame
 
-SCREEN_SIZE = [1400, 960]
-
 class MainWindow < Chingu::Window
 
   alias current current_game_state
 
   def initialize
-    super *SCREEN_SIZE, false
+    super *$config['screen_size'], false
     #Gosu.enable_undocumented_retrofication
     
     push_game_state SpaceGame::ChooseGame

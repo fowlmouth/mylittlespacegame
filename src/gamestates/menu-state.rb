@@ -1,7 +1,7 @@
 module SpaceGame
 class ChooseGame < PhysicsState
 	GameStates = {
-		'Test Zone #1'  => [SpaceGame::Game, 48], #size 24, factor 2
+		'Test Zone #1'  => [SpaceGame::TestZone1, 48], #size 24, factor 2
 		'Turret Test'   => [SpaceGame::Tests::TurretTest, 24],
 		'Wormhole Test' => [SpaceGame::Tests::WormholeTest, 36],
 		'Static Test'   => [SpaceGame::Tests::StaticTest, 36],
@@ -18,13 +18,18 @@ class ChooseGame < PhysicsState
     
     opts = {
       col_type: :text,
-      col_shape: :poly,
+      col_shape: :rect,
       mass: 15,
       elasticity: 0.95,
-      force: 0.92
+      force: 0#0.92
     }
 		GameStates.each { |name, state| 
-			FloatyText.create name, state[0], state[1], opts.merge(factor: state[2] || 1, mass: opts[:mass]*(state[1]/48.0))
+			FloatyText.create name, 
+        state[0], state[1], 
+        opts.merge(
+          factor: state[2] || 1, 
+          mass: opts[:mass]*(state[1]/48.0)
+        )
 		}
     #forgot what i was going to put in here so disabled before i
     #even start on it
@@ -35,9 +40,12 @@ class ChooseGame < PhysicsState
           x: 100, y: 100, size: 36, expire: 2500)
         #goto_state(SpaceGame::ConfigState)
     end
-    15.times { Asteroid.create x: rand_x, y: rand_y, force: 1.3 }
-    @player = PlayerShip.create ship: :Masta
-    $window.caption = ?:<<?<
+    
+    #15.times { Asteroid.create x: rand_x, y: rand_y, force: 1.3 }
+    #Asteroid.create x: rand_x, y: rand_y, force: 2
+    
+    @player = PlayerShip.create ship: :Masta, weapons: [:grapple_hook]
+    
     self.input = {
       esc: :exit,
       p: proc do binding.pry end,
@@ -56,8 +64,10 @@ class ChooseGame < PhysicsState
   
   def goto_state(state, name)
     @ready = false
-    Chingu::Text.create name, size: 50, x: game_area[0]/2, y: game_area[1]/2, rotation_center: :center
-    after(15) { $window.push_game_state state }
+    StaticText.create name, size: 50,
+      x: game_area[0]/2, y: game_area[1]/2,
+      rotation_center: :center, expire: 500
+    after(200) { $window.push_game_state state }
   end
   
   def finalize()
@@ -107,8 +117,8 @@ class FloatyText < PhysicsObject
     @name, @state = name, state
     
     @image = Gosu::Image.from_text $window, name, "#{ROOT_DIR}/data/fnt/pricedown.ttf", size#, #0, 250, :left
-    opts[:x] = $window.current_scope.rand_x #rescue binding.pry
-    opts[:y] = $window.current_scope.rand_y
+    opts[:x] ||= $window.current_scope.rand_x #rescue binding.pry
+    opts[:y] ||= $window.current_scope.rand_y
     opts[:rotation_center] = :center
 		super opts
     
@@ -127,12 +137,13 @@ class FloatyText < PhysicsObject
   def hit_by obj, *_
     #binding.pry
     @parent.goto_state @state, @name \
-      if obj.is_a?(Bullet) && obj.from.is_a?(PlayerShip) && @state && @parent.ready
+      if obj.is_a?(Bullet) && obj.from.is_a?(PlayerShip) \
+                 && @state && @parent.ready
   end
 end
 class StaticText < Chingu::Text
   trait :collision_detection
-  trait :bounding_box, debug: true
+  trait :bounding_box#, debug: true
   trait :timer
   def initialize text = '', opts={}, &block
     super text, opts

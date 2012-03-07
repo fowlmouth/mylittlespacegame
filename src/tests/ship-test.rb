@@ -8,7 +8,6 @@ def setup
   game_area 1280, 1024
   border 20, no_collision: [:bullet, :asteroid]
   
-  
   @space.add_collision_func(:ship, :cloud) do |ship, cloud|
   # binding.pry
     ship.object.transparency 80
@@ -34,7 +33,16 @@ def setup
   Hostile.create ship: :Zap, target: Hostile, x: 800, y: 400
   Hostile.create ship: :Rip, target: Hostile, x: 800, y: 500
   
-  self.input = { p: proc do binding.pry end }
+  game_objects_of_class(Ship).each { |s|
+    s.instance_eval do @health = @health * 0.20 end 
+  }
+
+  self.input = {
+    escape: :dat_menu,
+    p: proc do binding.pry end,
+  }
+
+  super
 end
 
 end; end; end

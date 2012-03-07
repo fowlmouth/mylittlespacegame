@@ -125,6 +125,24 @@
   :fire_sound: bomb5.wav
   :range: 600
   :optimal_range: 400
+:bio_bomb_prox:
+  :bullet: :bio_bomb_prox
+  :type: :bomb
+  :cooldown: 180
+  :energy_cost: 350
+  :name: Ultra Bio Bomb
+  :fire_sound: bomb5.wav
+  :range: 600
+  :optimal_range: 600
+:bio_bomb_jam:
+  :bullet: :bio_bomb_jam
+  :type: :bomb
+  :cooldown: 185
+  :energy_cost: 330
+  :name: Bio Jammer
+  :fire_sound: bomb5.wav
+  :range: 600
+  :optimal_range: 600
 :bio_cannon:
   :bullet: :bio_cannon
   :type: :cannon
@@ -132,6 +150,16 @@
   :energy_cost: 160
   :price: 200
   :recoil: 0.02
+  :name: Bio Cannon
+  :fire_sound: gun3.wav
+  :range: 200
+  :optimal_range: 120
+:bio_cannon_dual:
+  :bullet: :bio_cannon
+  :type: :cannon
+  :cooldown: 33
+  :energy_cost: 180
+  :name: Dual Bio Cannon
   :fire_sound: gun3.wav
   :range: 200
   :optimal_range: 120

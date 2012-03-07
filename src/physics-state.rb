@@ -19,6 +19,7 @@ class PhysicsState < Chingu::GameState
     
     @space.add_collision_func(:bullet, :asteroid, &proc)
     @space.add_collision_func(:bullet, :ship, &proc)
+    @space.add_collision_func(:bullet, :resource, &proc)
     
     @space.add_collision_func(:prize, :ship) do |r, ship|
       ship.object.collect_item(r.object)
@@ -63,7 +64,11 @@ class PhysicsState < Chingu::GameState
         @space.add_shape s
       }
       o[:no_collide].each { |ct|
-        @space.add_collision_func(:border, ct, &nil)
+        @space.add_collision_func(:border, ct) do |border, obj|
+          if obj.object.has_attached?
+            true
+          else false end
+        end
       } if o[:no_collide]
       
       @whole_area = [
@@ -137,5 +142,43 @@ class PhysicsState < Chingu::GameState
     #obj1 = -((obj1.dist(obj2.pos)/7) * 0.001)+0.1
     (obj1 = 0.1 - ((obj1.dist(obj2.pos)/7) * 0.001)) < 0 ? nil : obj1
   end
+
+# do not include Minimap without setting it up in the setup method..
+module Minimap
+  #TODO configurab,e size
+  def setup_minimap(order)
+    @minimap_order = order
+    @minimap = [
+      TexPlay.create_blank_image($window, 200, 200),
+      game_area[0]/200.0,
+      game_area[1]/200.0,
+      -1,  # index
+      nil, # array of layers
+      $window.width - (200 + 5), #screen pos x
+      5,                         #screen pos y
+    ]
+    @minimap[4] = order.map { @minimap[0].dup }
+    @minimap[0].each {|c| c[3] = 1}
+  end
+
+  def update
+    super
+
+    m = @minimap_order[(@minimap[3] = (@minimap[3] + 1) % @minimap_order.size)]
+    @minimap[4][@minimap[3]].clear
+    game_objects_of_class(m[0]).each { |e|
+      @minimap[4][@minimap[3]].pixel \
+        (e.x/@minimap[1]).to_i, 
+        (e.y/@minimap[2]).to_i,
+        color: m[1]
+    }
+  end
+
+  def draw
+    super
+    @minimap[0].draw @minimap[5], @minimap[6], 700, 1,1
+    @minimap[4].each_with_index { |img, i| img.draw @minimap[5], @minimap[6], 701+i, 1,1 }
+  end
+end
 end
 end

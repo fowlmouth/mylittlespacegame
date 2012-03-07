@@ -29,19 +29,34 @@ trait :sprite
       @body.vel *= @options[:force] if @options[:force]
     end
 
-    if @options[:col_shape] != :poly || @image # 
+    if @options[:col_shape] != :rect || (width && height) # this was to delay generation until the @image exists but im not sure its needed now
       @shape = case @options[:col_shape]
       when :circle
         CP::Shape::Circle.new(@body, @options[:radius] || width/2, CP::Vec2.new(0, 0))
-      when :poly
+      when :rect
         #TODO combine into one line
         verts = [
-          CP::Vec2.new( 0, 0),
-          CP::Vec2.new( 0, width),
-          CP::Vec2.new( height, width),
-          CP::Vec2.new( height, 0),
+          CP::Vec2.new( height, 0), # top right   #Actual pt
+            #top left                             #Where it appears on Text ??
+          CP::Vec2.new( 0, 0), # top left
+            #btm left
+          CP::Vec2.new( 0, width), # bottom left
+            #btm right
+          CP::Vec2.new( height, width), # bottom right
+            #top right
         ]
+
+        verts = [
+          vec2(0, 0),  #T L
+          vec2(0, height), #B L
+          vec2(width, height), #B R
+          vec2(width, 0), #T R
+        ]
+        #verts = [verts[3], *verts[0,3]] 
         CP::Shape::Poly.new(@body, CP.recenter_poly(verts), vec2(0, 0))
+      when :poly #unused ATM
+        #expect @options[:verts] to be set up
+        CP::Shape::Poly.new(@body, CP.recenter_poly(@options[:verts]), @options[:verts][0])
       else
         raise "Bad shape #{@options[:col_shape]}, wtf??"
       end
@@ -54,15 +69,20 @@ trait :sprite
       parent.space.add_shape @shape
     end
   end
-  
+
+
+  DebugColors = [
+    Gosu::Color::RED, Gosu::Color::BLUE,
+    Gosu::Color::GREEN,Gosu::Color::YELLOW
+  ]
   def draw_debug()
     if @options[:col_shape] == :circle then
       $window.draw_circle *@body.pos, @shape.radius, ::Chingu::DEBUG_COLOR#, 999  # uncomment for chingu 0.9 
-    elsif @options[:col_shape] == :poly then
+    elsif @options[:col_shape] == :poly || @options[:col_shape] == :rect then
       a = @body.a.radians_to_vec2
       @shape.num_verts.times { |v|
         point = @body.pos + @shape.vert(v).rotate(a)
-        $window.draw_circle point.x, point.y, 2, ::Chingu::DEBUG_COLOR#, 999
+        $window.draw_circle point.x, point.y, 2, DebugColors[v]#::Chingu::DEBUG_COLOR#, 999
       }
     end
   end
@@ -74,9 +94,12 @@ trait :sprite
 #     wrap_pos
 #   end
   
-  def reset_forces() @shape.body.reset_forces() end
+  def reset_forces() @body.reset_forces() end
   
-  def angle() @body.vel.to_angle end
+  #default for non-attachable objects, overwritten by Attachable module
+  def has_attached?(o=nil) nil end
+
+  def angle() @body.angle end #@body.vel.to_angle end
   def angle_gosu() angle.radians_to_gosu end
   
   def destroy
@@ -109,6 +132,7 @@ trait :sprite
     @parent.push_sound Gosu::Sound['warpin2.wav'], @body.p
   end
   
+  #TODO this needs help, it doesn't wrap correctly, but it works for the moment
   def wrap_pos()
     @body.pos = vec2(       ### @parent.border is the size of the buffer zone
       ((x + @parent.border) % @parent.whole_area[0]) - @parent.border,
@@ -130,7 +154,7 @@ module Attachable
   def destroy()
     @attachments.each { |s|
       s[0].remove_from_space(@parent.space)
-      s[1].remove_attached(self)
+      s[1].remove_attached(self, false)
     } unless @attachments.empty?
     @attachments = []
     super
@@ -140,10 +164,13 @@ module Attachable
     @attachments << [spring, owner]
   end
 
-  def remove_attached(object)
+  def remove_attached(object, remove_from_space = true)
     @attachments.delete_if { |a|
       if a[1] == object
-        a[0].remove_from_space(@parent.space)
+        if remove_from_space 
+          a[0].remove_from_space(@parent.space)
+          a[1].remove_attached(self, false)
+        end  
         true
       else false end }
   end
@@ -151,7 +178,12 @@ module Attachable
   def remove_last_attachment()
     remove_attached(@attachments.last[1]) unless @attachments.empty?
   end
-end
 
+  def has_attached?(obj = nil)
+    obj.nil?                 ?
+      !@attachments.empty?   :
+      @attachments.find{|a| a[1] == obj}
+  end
+end
 end
 end

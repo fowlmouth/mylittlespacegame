@@ -19,7 +19,7 @@ class StaticTest < PhysicsState
     keys_info '[ESC] Quit game'
     keys_info '[P] Start pry'
     keys_info '[A] Add new asteroid'
-    keys_info '[LCK] New point on poly'
+    keys_info '[LCLICK] New point on poly'
     keys_info ''
     keys_info '[J/K] Switch active obj'
     keys_info '[RCLICK] Place object'

@@ -60,7 +60,7 @@ W_LIMIT = 0.5 # limits the rotational velocity
     @health = @max_health = options[:armor].f
     @energy = @max_energy = options[:energy].f
     @inv = Inventory.new(options[:inv] || nil)
-    @status, @stalled = ShipStatus.new, false
+    @status, @stalled, @weapon_jam = ShipStatus.new, false, false
     
     @trate = options[:turning_rate] || 12
     @faccel = options[:faccel] || 45.0
@@ -165,12 +165,13 @@ W_LIMIT = 0.5 # limits the rotational velocity
         @image = @anim[anim_angle].first
       end
     end
+
     super
-    #p @weapons, __LINE__
-    #binding.pry
+
     @weapons.each { |w| w.update unless w.nil? }
 
     @stalled = @status.is? :STALL
+    @weapon_jam = @status.is? :JAM
   end
 
   def draw
@@ -178,8 +179,12 @@ W_LIMIT = 0.5 # limits the rotational velocity
     #$window.draw_circle *@body.pos, @shape.radius, ::Chingu::DEBUG_COLOR, 999
     unless @attachments.empty?
       a = @attachments[@attach_i = (@attach_i + 1) % @attachments.size]
-      $window.draw_line x, y, Gosu::Color::WHITE,
-                a[1].x,a[1].y,Gosu::Color::WHITE,0 if a 
+      if @attachment_anim then
+        (@attachment_anim.next).draw_rot
+      else
+        $window.draw_line x, y, Gosu::Color::WHITE,
+                  a[1].x,a[1].y,Gosu::Color::WHITE,0 if a 
+      end
     end
     #r = @health/@max_health
     #@energy = @max_energy if @options[:unlimited_energy]
@@ -196,7 +201,8 @@ W_LIMIT = 0.5 # limits the rotational velocity
   def equip wpn = nil
     return unless wpn
     wpn = Weapon[wpn, self, @weapons.size]
-    (@weapons << wpn) if wpn
+    if wpn then @weapons << wpn; wpn
+    else false end
   end
   
   def collect_item item
@@ -207,7 +213,7 @@ W_LIMIT = 0.5 # limits the rotational velocity
   end
   
   def shoot0 id=0
-    @weapons[id] && @weapons[id].shoot
+    @weapons[id].shoot if !@weapon_jam && @weapons[id]
   end
   def shoot1() shoot0(1) end
   def shoot2() shoot0(2) end
@@ -229,9 +235,10 @@ W_LIMIT = 0.5 # limits the rotational velocity
   end
   
   def explode
-    
     destroy
-    after(200) do Debris.HappySetExplosion(0, 4, x: x, y: y, force: 5.5..11.3) end
+    after(200) do
+      Debris.HappySetExplosion 0, x, y, 5.5..15, 4
+    end
   end
   
   def boost
@@ -335,48 +342,26 @@ end
 
 class PlayerShip < Ship
 include ::Chingu::Helpers::InputClient
+  def initialize(o={})
+    @gui_weapons = []
+    super(o)
+  end
   def setup
-    if $config[:gamepad] # TODO finish or remove
-      self.input = {
-        gp_up: :accel,
-        gp_down: :decel,
-        gp_left: :turn_left,
-        gp_right: :turn_right,
-        gp_1: :shoot0,
-        gp_2: :shoot1,
-        gp_3: :shoot3
-      }
-    else
-      inp = YAML.load_file(File.expand_path('./data/controls.yml'))
-      scheme = RUBY_PLATFORM =~ /darwin/ ? 'mac' : 'controls'
-      controls = {}
-      inp[:chingu][:togglable].each { |s|
-        #['boost', 'unboost']
-        key = inp[scheme].delete s[0]
-        controls[key.intern] = s[0].intern
-        controls["released_#{key}".intern] = s[1].intern
-      }
-      self.input = controls.merge(Hash[inp[scheme].map { |meth, key|
-        ["holding_#{key}".intern, meth.intern]
-      }])
-    end
-=begin
-    self.input = {
-      holding_up: :accel,
-      holding_down: :decel,
-      holding_left: :turn_left,
-      holding_right: :turn_right,
-      holding_z: :strafe_left,
-      holding_x: :strafe_right,
-      left_shift: :boost,
-      released_left_shift: :unboost,
-      holding_lctrl: :shoot0,
-      holding_tab: :shoot1,
-      holding_q: :shoot2,
-      escape: :exit,
+    inp = YAML.load_file(File.expand_path('./data/controls.yml'))
+    scheme = $config['controls']
+    raise "Invalid control scheme #{scheme} please set one in user_settings.yml that exists in data/controls.yml" \
+      unless inp.has_key? scheme
+    controls = {}
+    inp[:chingu][:togglable].each { |s|
+      #['boost', 'unboost']
+      key = inp[scheme].delete s[0]
+      controls[key.intern] = s[0].intern
+      controls["released_#{key}".intern] = s[1].intern
     }
-    end
-=end
+    self.input = controls.merge(Hash[inp[scheme].map { |meth, key|
+      ["holding_#{key}".intern, meth.intern]
+    }])
+    
     offs = CP::Vec2.new(options[:radius], 0) #wtf? >:(
     @aiming_tick = Chingu::GameObject.new rotation_center: :bottom_center
     @aiming_tick.instance_eval do
@@ -399,7 +384,11 @@ include ::Chingu::Helpers::InputClient
   def draw
     super
     e = @energy / @max_energy
-    $window.fill_rect [(SCREEN_SIZE[0]/3)+$window.current.viewport.x.i, (SCREEN_SIZE[1]-7)+$window.current.viewport.y.i, e*(SCREEN_SIZE[0]/3), 5], 0xff000000 + (0xff*e).to_i*256 + (0xff*(1-e)).to_i*256*256, 2 unless e < 0
+    $window.fill_rect [
+      ($window.width/3)+parent.viewport.x.i, 
+      ($window.height-7)+parent.viewport.y.i, 
+      e*($window.width/3), 
+      5], 0xff000000 + (0xff*e).to_i*256 + (0xff*(1-e)).to_i*256*256, 2 unless e < 0
 
     @aiming_tick.draw_relative *(pos + @body.a.radians_to_vec2.rotate(@aiming_tick.offs)), 900, (@body.a.radians_to_gosu%360)
 =begin    
@@ -411,6 +400,24 @@ include ::Chingu::Helpers::InputClient
       end
     }
 =end
+    @weapons.each_with_index { |w, i|
+      if w 
+        progress = 1.0 - [(w.cooldown.f / w.max_cooldown), 0.0].max
+        if progress > 0
+          $window.fill_rect [34, 10+30*i+20*(progress), 2, 20*(1-progress)], 0xffff0000, 1000000
+        end
+      end
+    }
+  end
+
+  def equip(wpn = nil)
+    if !wpn.nil? && (w = super(wpn)).is_a?(Weapon)
+      #make a new sprite
+      text = GuiOverlay::Text.create(w.name, size: 16, color: Gosu::Color::BLUE)
+      text.x = $window.width - text.width
+      text.y = $window.height-(16 * (1 + @gui_weapons.size))
+      @gui_weapons << text
+    end
   end
 end
 end

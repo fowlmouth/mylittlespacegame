@@ -34,14 +34,14 @@ include DebugGUI
     
     keys_info '[ESC] Quit game'
     keys_info '[P] Start pry'
-    keys_info '[T] Target new asteroid'
-    keys_info '[A] Add new asteroid'
+    keys_info '[T] All turrets find new targets'
+    keys_info '[I] Add new asteroid'
     
     self.input = {
-      escape: :exit,
+      escape: :dat_menu,
       p: -> { binding.pry },
       t: -> { Turret.all.each &:find_new_target },
-      a: -> { Asteroid.create x: 500, y: 500 },
+      i: -> { Asteroid.create x: 500, y: 500 },
       holding_mouse_left: :lclick,
       holding_mouse_right: :rclick,
     } 
@@ -53,7 +53,8 @@ include DebugGUI
     #@ast.body.apply_impulse(CP::Vec2.new(10, 0), CP::Vec2.new(0,0))
     #@player.turn_left
     # closest asteroid
-    ca = Asteroid.all.sort_by { |a| a.pos.dist(@cursor.pos) }.first
+    ca = game_objects_of_class(Asteroid).sort_by { |a| a.pos.dist(@cursor.pos) }.first
+    #ca = Asteroid.all.sort_by { |a| a.pos.dist(@cursor.pos) }.first
     ca.explode if ca
   end
   

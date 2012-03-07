@@ -11,7 +11,6 @@
     - :type: :cannon
       :offs: [30, 0]
     - :type: :bomb
-      :offs: [30, 0]
     - :type: :defense
       :offs: [-30, 0]
     - :type: :extra    #at this point I realized I should just default the offest to the first slot. that makes sense at this point in time to me...
@@ -40,11 +39,13 @@
     - :type: :cannon
       :offs: [30, 0]
     - :type: :bomb
-      :offs: [30, 0]
     - :type: :defense
-      :offs: [30, 0]
+      :offs: [-30, 0]
+    - :type: :extra 
+    - :type: :extra 
+    - :type: :extra
   :weapons:
-    - :bio_cannon    # :dual_bio_cannon
+    - :bio_cannon_dual    # :dual_bio_cannon
     - :bio_bomb
     - :bio_mine
   :thrust:
@@ -67,12 +68,15 @@
     - :type: :cannon
       :offs: [30, 0]
     - :type: :bomb
-      :offs: [30, 0]
     - :type: :defense
-      :offs: [30, 0]
+      :offs: [-30, 0]
+    - :type: :extra 
+    - :type: :extra 
+    - :type: :extra
   :weapons:
     - :bio_cannon
-    - :bio_bomb
+    - :bio_bomb_prox
+    - :bio_mine
   :thrust:
     :timer: 220
     :file: thrust2_16x16.png
@@ -92,12 +96,15 @@
     - :type: :cannon
       :offs: [30, 0]
     - :type: :bomb
-      :offs: [30, 0]
     - :type: :defense
-      :offs: [30, 0]
+      :offs: [-30, 0]
+    - :type: :extra 
+    - :type: :extra 
+    - :type: :extra
   :weapons:
     - :bio_cannon
-    - :bio_bomb
+    - :bio_bomb_jam
+    - :bio_mine
   :thrust:
     :timer: 220
     :file: thrust2_16x16.png
@@ -115,10 +122,14 @@
   :energy: 1700
   :radius: 23
   :slots: 
-  - :type: :cannon
-    :offs: [30, 0]
-  - :type: :bomb
-    :offs: [30, 0]
+    - :type: :cannon
+      :offs: [30, 0]
+    - :type: :bomb
+    - :type: :defense
+      :offs: [-30, 0]
+    - :type: :extra 
+    - :type: :extra 
+    - :type: :extra
   :weapons:
   - :mass_driver
   - :plasma_pulse
@@ -141,7 +152,11 @@
   - :type: :cannon
     :offs: [30, 0]
   - :type: :bomb
-    :offs: [30, 0]
+  - :type: :defense
+    :offs: [-30, 0]
+  - :type: :extra 
+  - :type: :extra 
+  - :type: :extra
   :weapons:
   - :mass_driver   # dual_mass_driver
   - :fusion_bomb
@@ -165,7 +180,6 @@
   - :type: :cannon
     :offs: [30, 0]
   - :type: :bomb
-    :offs: [30, 0]
   - :type: :defense
     :offs: [-30, 0]
   - :type: :extra
@@ -193,7 +207,11 @@
   - :type: :cannon
     :offs: [30, 0]
   - :type: :bomb
-    :offs: [30, 0]
+  - :type: :defense
+    :offs: [-30, 0]
+  - :type: :extra 
+  - :type: :extra 
+  - :type: :extra
   :weapons:
   - :meson_cannon
   - :meson_bomb
@@ -218,7 +236,11 @@
   - :type: :cannon
     :offs: [30, 0]
   - :type: :bomb
-    :offs: [30, 0]
+  - :type: :defense
+    :offs: [-30, 0]
+  - :type: :extra 
+  - :type: :extra 
+  - :type: :extra
   :thrust:
     :timer: 220
     :file: thrust2_16x16.png
@@ -238,7 +260,11 @@
   - :type: :cannon
     :offs: [30, 0]
   - :type: :bomb
-    :offs: [30, 0]
+  - :type: :defense
+    :offs: [-30, 0]
+  - :type: :extra 
+  - :type: :extra 
+  - :type: :extra
   :thrust:
     :timer: 220
     :file: thrust2_16x16.png
@@ -258,7 +284,11 @@
   - :type: :cannon
     :offs: [30, 0]
   - :type: :bomb
-    :offs: [30, 0]
+  - :type: :defense
+    :offs: [-30, 0]
+  - :type: :extra 
+  - :type: :extra 
+  - :type: :extra
   :thrust:
     :timer: 220
     :file: thrust2_16x16.png
@@ -278,7 +308,11 @@
   - :type: :cannon
     :offs: [30, 0]
   - :type: :bomb
-    :offs: [30, 0]
+  - :type: :defense
+    :offs: [-30, 0]
+  - :type: :extra 
+  - :type: :extra 
+  - :type: :extra
   :thrust:
     :timer: 220
     :file: thrust2_16x16.png
@@ -305,6 +339,32 @@
     :timer: 5
     :file: thrust3_16x16.png
     :delay: 5
+    :offs: 
+      - [-30, 0]
+
+:A09:
+  :name: bot
+  :img: ships/A09_54x54.png
+  :rotation_points: 64
+  :size: [54, 54]
+  :factor: 0.4
+  :roll: yes
+  :armor: 100
+  :energy: 1700
+  :radius: 23
+  :slots: 
+  - :type: :cannon
+    :offs: [30, 0]
+  - :type: :bomb
+  - :type: :defense
+    :offs: [-30, 0]
+  - :type: :extra 
+  - :type: :extra 
+  - :type: :extra
+  :thrust:
+    :timer: 220
+    :file: thrust2_16x16.png
+    :delay: 75
     :offs: 
       - [-30, 0]
 

@@ -3,7 +3,7 @@ module Tests
 module DebugGUI
   def keys_info str
     @keys_info << Chingu::Text.create(str, size: 14, y: @keys_info.size * 15)
-    @keys_info.last.x = SCREEN_SIZE[0]-@keys_info.last.width
+    @keys_info.last.x = $window.width-@keys_info.last.width
   end
 
   def add_debug_info str, proc = nil, &block

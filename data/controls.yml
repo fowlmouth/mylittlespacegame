@@ -1,4 +1,4 @@
-controls:
+windows:
   accel: up
   decel: down
   turn_left: left
@@ -28,6 +28,21 @@ mac:
   shoot4: s
   shoot5: d
   detach: f
+gamepad:
+  accel: gp_up
+  decel: gp_down
+  turn_left: gp_left
+  turn_right: gp_right
+  strafe_left: z
+  strafe_right: x
+  boost: left_shift
+  shoot0: gp_1
+  shoot1: gp_2
+  shoot2: gp_3
+  shoot3: a
+  shoot4: s
+  shoot5: d
+  detach: gp_4
 
 # 
 :chingu:

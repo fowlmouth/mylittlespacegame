@@ -1,5 +1,6 @@
 module SpaceGame
 class Resource < PhysicsObject
+include PhysicsObject::Attachable
   def self.[] key, opts={}
     @animations ||= {}
     if @animations[key]
@@ -13,23 +14,6 @@ class Resource < PhysicsObject
   end
   
   attr_reader :weight
-  include Attachable
-
-  # def initialize(opts={}) 
-  #   super opts
-  #   @attachments = []
-  # end
-
-  # def destroy
-  #   @attachments.each { |s|
-  #     s[0].remove_from_space(@parent.space)
-  #     s[1].remove_attached(self)
-  #   }
-  # end
-  
-  # def add_spring(spring, owner)
-  #   @attachments << [spring, owner]
-  # end
 
   def init_physics
     super
@@ -101,13 +85,13 @@ class Debris < Resource
       'debris/ChunkJ_24x24.png',
     ]
   ]
-  def self.HappySetExplosion(s, num = 4, opts = {})
+  def self.HappySetExplosion(s, x, y, force, num = 4)
     num.times do
       Debris.create \
         debris: DebrisSets[s].sample,
-        x: opts[:x], y: opts[:y], 
+        x: x, y: y, 
         vel: rand(360).degrees_to_radians.radians_to_vec2,
-        force: rand(opts[:force])
+        force: rand(force)
     end
   end
   def initialize opts={}
@@ -120,7 +104,7 @@ class Debris < Resource
     self.weight = 0.2
 
     @body.velocity_func do |body, gravity, damping, dt|
-      body.update_velocity(gravity, 0.95, dt)
+      body.update_velocity(gravity, 0.989, dt)
     end
   end
 end

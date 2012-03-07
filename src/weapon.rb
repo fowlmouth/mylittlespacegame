@@ -6,20 +6,22 @@ class Weapon
       @weapons ||= YAML.load_file(File.expand_path 'data/weapons.yml')
       if @weapons.has_key? key
         unless args.empty?
-          Weapon.new @weapons[key], *args
+          Weapon.new @weapons[key], key, *args
         else
           @weapons[key]
         end
       else
-        raise "Invalid weapon: #{key}"
+        raise "Invalid weapon: #{key}\n#{args}"
       end
     end
     
     def weapons() @weapons end
   end
+
+  attr_accessor :name, :cooldown, :max_cooldown
   
-  def initialize options={}, ship=nil, shipslot=nil
-    if shipslot && shipslot > ship.options[:slots].size then return false end
+  def initialize options={}, wpn_id=nil, ship=nil, shipslot=nil
+    return false if shipslot && shipslot > ship.options[:slots].size
   
     @ship = ship
     
@@ -31,6 +33,8 @@ class Weapon
     
     @max_cooldown = options[:cooldown]
     @cooldown = 0
+
+    @name = options[:name] || wpn_id.to_s
     
     @recoil = options[:recoil] || 0
     @reload = options[:reload] || nil

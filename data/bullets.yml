@@ -9,10 +9,10 @@
   :delay: 60
   :mass: 0.5
   :trail:
-    :file: doors/EnergyDoorVert2.png
-    :size: [16, 64]
-    :range: 0..15
-    :delay: 64
+    :file: doors/EnergyDoorVert_16x32.png
+    :size: [16, 32]
+    :range: 13..29
+    :delay: 100
     :timer: 10
   :damage:
     :asteroid: 0
@@ -79,6 +79,53 @@
     :asteroid: 23
     :energy: 300
     :health: 4.2
+  :explode:
+    :sound: ebomb3.wav
+    :image: explosions/bombHit0_36x36.png
+    :delay: 7
+  :trail:
+    :file: bullets/EBombTrail_YELLOW_20x20.png
+    :delay: 70
+    :timer: 110
+:bio_bomb_prox:
+  :timer: 8000
+  :speed: 26.7
+  :img: bullets/EBombTumbleXYE_YELLOW_24x24.png
+  :size: [24, 24]
+  :delay: 40
+  :radius: 8
+  :prox:
+    :delay: 500
+    :radius: 32
+  :damage:
+    :asteroid: 27
+    :energy: 320
+    :health: 4.0
+  :explode:
+    :sound: ebomb3.wav
+    :image: explosions/bombHit0_36x36.png
+    :delay: 7
+  :trail:
+    :file: bullets/EBombTrail_YELLOW_20x20.png
+    :delay: 70
+    :timer: 110
+:bio_bomb_jam:
+  :timer: 8000
+  :speed: 26.7
+  :img: bullets/EBombTumbleXYE_YELLOW_24x24.png
+  :size: [24, 24]
+  :delay: 40
+  :radius: 8
+  :prox:
+    :delay: 500
+    :radius: 24
+  :damage:
+    :asteroid: 23
+    :energy: 300
+    :health: 4.2
+    :status:
+      - :JAM 
+      - 50
   :explode:
     :sound: ebomb3.wav
     :image: explosions/bombHit0_36x36.png
