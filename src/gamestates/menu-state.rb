@@ -41,8 +41,8 @@ class ChooseGame < PhysicsState
         #goto_state(SpaceGame::ConfigState)
     end
     
-    #15.times { Asteroid.create x: rand_x, y: rand_y, force: 1.3 }
-    #Asteroid.create x: rand_x, y: rand_y, force: 2
+    15.times { Asteroid.create x: rand_x, y: rand_y, force: 1.3 }
+    5.times { Asteroid.create x: rand_x, y: rand_y, force: 6 }
     
     @player = PlayerShip.create ship: :Masta, weapons: [:grapple_hook]
     
