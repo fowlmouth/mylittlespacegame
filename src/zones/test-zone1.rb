@@ -4,8 +4,8 @@ include Minimap
 
   PlayableShips = [
     :Masta, :Skithist, :Kragath, :Tarthist,
-    :Asp, :Excelsior, :Hornet, :Ravager,
-    :Zag, :Rak, :Zap, :Rip
+    :Asp, :Hornet, #:Excelsior, :Ravager,
+    :Rak, :Rip, #:Zag, :Zap
   ]
   def setup
     #game_area 3000, 3000

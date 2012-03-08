@@ -34,26 +34,12 @@ trait :sprite
       when :circle
         CP::Shape::Circle.new(@body, @options[:radius] || width/2, CP::Vec2.new(0, 0))
       when :rect
-        #TODO combine into one line
-        verts = [
-          CP::Vec2.new( height, 0), # top right   #Actual pt
-            #top left                             #Where it appears on Text ??
-          CP::Vec2.new( 0, 0), # top left
-            #btm left
-          CP::Vec2.new( 0, width), # bottom left
-            #btm right
-          CP::Vec2.new( height, width), # bottom right
-            #top right
-        ]
-
-        verts = [
-          vec2(0, 0),  #T L
-          vec2(0, height), #B L
-          vec2(width, height), #B R
-          vec2(width, 0), #T R
-        ]
-        #verts = [verts[3], *verts[0,3]] 
-        CP::Shape::Poly.new(@body, CP.recenter_poly(verts), vec2(0, 0))
+        CP::Shape::Poly.new(@body, CP.recenter_poly([
+          vec2(0, 0),          #Top Left Red
+          vec2(0, height),     #Btm Left Blue
+          vec2(width, height), #Btm Rght Green
+          vec2(width, 0),      #Top Rght Yellow
+        ]), vec2(0, 0))
       when :poly #unused ATM
         #expect @options[:verts] to be set up
         CP::Shape::Poly.new(@body, CP.recenter_poly(@options[:verts]), @options[:verts][0])

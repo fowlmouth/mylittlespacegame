@@ -124,13 +124,13 @@ class FloatyText < PhysicsObject
     
     @body.vel = rand(360).degrees_to_radians.radians_to_vec2 * rand(3..5)
     @body.vel *= opts[:force] if opts[:force]
-    @body.angle = 0.gosu_to_radians
+    @body.angle = 90.gosu_to_radians
 	end
 
   def to_s() "#{@name.downcase} => #{"#@state".downcase} -- " << super end
   
   def draw()
-    @image.draw_rot x, y, @zorder, @body.a.radians_to_gosu % 360, @center_x, @center_y, @factor_x, @factor_y, @color, @mode
+    @image.draw_rot x, y, @zorder, (angle_gosu - 90)%360, @center_x, @center_y, @factor_x, @factor_y, @color, @mode
     draw_debug
   end
 

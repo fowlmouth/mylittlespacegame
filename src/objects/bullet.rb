@@ -186,6 +186,8 @@ trait :timer
     destroy
   end
   
+  def angle() @body.vel.to_angle end
+  
   def update
     if @rot_points
       @image = @anim[(angle_gosu/360.0*@rot_points).to_i]
