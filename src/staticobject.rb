@@ -45,11 +45,11 @@ class StaticObject < Chingu::GameObject
     @parent.space.add_body  @body
     @parent.space.add_shape @shape
   end
-=begin
+#=begin
   def x() @body.p.x end
   def y() @body.p.y end
   def pos() @body.p end
-=end
+#=end
   def draw
     @image.draw_rot x, y, 100, 0, @center_x, @center_y, scale, scale, @color if @image rescue binding.pry
     draw_debug

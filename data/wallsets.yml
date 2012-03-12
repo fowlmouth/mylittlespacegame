@@ -1,0 +1,14 @@
+#sets of wall objects
+std:
+  :dir: walls
+  horz: GenericWallA000_0000.png
+  vert: GenericWallA090_0000.png
+  nw: GenericWallA180diag_0000.png
+  sw: GenericWallA090diag_0000.png
+  se: GenericWallA000diag_0000.png
+  ne: GenericWallA270diag_0000.png
+smooth:
+  :dir: walls
+  horz: GenericWallC000_0000.png
+  vert: GenericWallC090_0000.png
+  

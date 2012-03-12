@@ -46,6 +46,19 @@ module DebugGUI
     end
     #def update() @x, @y = x, y end
   end
+  
+  class DebugCursor < Cursor
+    def setup
+      super
+      @loc = Chingu::Text.create '', size: 16, color: Gosu::Color::WHITE
+    end
+    
+    def update
+      super
+      @loc.text = "(#{x.i},#{y.i})"
+      @loc.x, @loc.y = x, y + 16
+    end
+  end
 
 end
 end

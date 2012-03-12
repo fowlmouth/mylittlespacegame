@@ -36,8 +36,10 @@ Ship rolling - done
 
 # Tests
 
-Wormhole Gravity: `./main.rb wh` I'm not a scientist, and bad at math, so its taking a while to get this right
+Tests are now available from the menu screen, the bigger ones are more relevant
 
-Static Objects: `./main.rb st` This will probably turn into a map editor
+Wormhole Gravity: I'm not a scientist, and bad at math, so its taking a while to get this right
 
-Turrets: `./main.rb tt` Turrets work satisfactory now but still need some tweaking
+Static Objects: This will probably turn into a map editor
+
+Turret Test: Turrets work satisfactory now but still need some tweaking

@@ -66,16 +66,12 @@ class PhysicsState < Chingu::GameState
       o[:no_collide].each { |ct|
         @space.add_collision_func(:border, ct) do |border, obj|
           if obj.object.has_attached?
-            true
-          else false end
+            true #bounce off the border
+          else false end #dont bounce
         end
       } if o[:no_collide]
       
       @whole_area = [
-#         -@borders[0],
-#         w + @borders[0], 
-#         -@borders[0],
-#         h + @borders[0],
         w + @borders[0].*(2),
         h + @borders[0].*(2),
       ]
@@ -94,6 +90,7 @@ class PhysicsState < Chingu::GameState
 
   #returns to the first menu (or last?)
   def dat_menu() 
+    game_states.size == 1 && exit #fires if this is the only gamestate
     Chingu::Text.create 'Now leaving :(', size: 48, x: 200, y: 200, color: Gosu::Color::RED
     after(500) { $window.pop_game_state(setup: false) }
   end
@@ -130,6 +127,8 @@ class PhysicsState < Chingu::GameState
       }
       @sound_queue = []
     end
+    
+    @viewport.center_around @player
   end
   
   def push_sound snd, pos
@@ -142,43 +141,5 @@ class PhysicsState < Chingu::GameState
     #obj1 = -((obj1.dist(obj2.pos)/7) * 0.001)+0.1
     (obj1 = 0.1 - ((obj1.dist(obj2.pos)/7) * 0.001)) < 0 ? nil : obj1
   end
-
-# do not include Minimap without setting it up in the setup method..
-module Minimap
-  #TODO configurab,e size
-  def setup_minimap(order)
-    @minimap_order = order
-    @minimap = [
-      TexPlay.create_blank_image($window, 200, 200),
-      game_area[0]/200.0,
-      game_area[1]/200.0,
-      -1,  # index
-      nil, # array of layers
-      $window.width - (200 + 5), #screen pos x
-      5,                         #screen pos y
-    ]
-    @minimap[4] = order.map { @minimap[0].dup }
-    @minimap[0].each {|c| c[3] = 1}
-  end
-
-  def update
-    super
-
-    m = @minimap_order[(@minimap[3] = (@minimap[3] + 1) % @minimap_order.size)]
-    @minimap[4][@minimap[3]].clear
-    game_objects_of_class(m[0]).each { |e|
-      @minimap[4][@minimap[3]].pixel \
-        (e.x/@minimap[1]).to_i, 
-        (e.y/@minimap[2]).to_i,
-        color: m[1]
-    }
-  end
-
-  def draw
-    super
-    @minimap[0].draw @minimap[5], @minimap[6], 700, 1,1
-    @minimap[4].each_with_index { |img, i| img.draw @minimap[5], @minimap[6], 701+i, 1,1 }
-  end
-end
 end
 end

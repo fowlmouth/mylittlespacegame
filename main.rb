@@ -9,8 +9,8 @@ ROOT_DIR = File.expand_path(File.dirname __FILE__)
 
 #TODO: time this
 %w[ main-window zorder physics-state physicsobject staticobject animations weapon ].each { |f| require_relative "src/#{f}" }
-%w[ ship aiships explosion bullet resource asteroid gascloud wormhole gui-overlay ].each { |f| require_relative "src/objects/#{f}" }
-%w[ debug-gui asteroid-test ship-test static-test turret-test thrust-test wormhole-test grappling-test ].each { |f| require_relative "src/tests/#{f}" }
+%w[ attachable minimap ship aiships explosion bullet resource asteroid gascloud wormhole terrain gui-overlay ].each { |f| require_relative "src/objects/#{f}" }
+%w[ debug-gui asteroid-test ship-test static-test turret-test thrust-test wormhole-test hyper-tunnel grappling-test ].each { |f| require_relative "src/tests/#{f}" }
 
 #gametype specific code is in here so separated 
 #has to load last
@@ -58,7 +58,14 @@ class Numeric
 end
 
 begin
-  SpaceGame::MainWindow.new.show
+  if state = ARGV.find { |_| _.size == 2 }
+    state = state.upcase
+    state = SpaceGame::ChooseGame::GameStates.find { |k, _| _[2] == state }
+    abort "Invalid state #{state} please check the top of src/gamestates/menu-state.rb for valid options" unless state
+    state = state[1][0]
+  else state = SpaceGame::ChooseGame end
+  
+  SpaceGame::MainWindow.new(state).show
 rescue
   case RUBY_PLATFORM
   when /linux/, /darwin/
@@ -73,7 +80,7 @@ rescue
       z[1] = "\e[33m#{z[1]}\e[0m"
       "#{z[0].join('/')}:#{z[1]}:#{z[2]}"
     }.join("\n")
-  when /mingw/
+  else
     puts "#{$!.class}: #{$!.message}"
     puts
     puts "  #{$!.backtrace.join "\n  "}"

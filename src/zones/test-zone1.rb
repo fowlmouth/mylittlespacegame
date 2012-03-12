@@ -105,7 +105,6 @@ include Minimap
       @stars.update
     end
     
-    @viewport.center_around @player
     #Gosu::milliseconds / 100 % @animation.size
   end
   

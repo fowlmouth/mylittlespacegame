@@ -1,14 +1,16 @@
 module SpaceGame
 class ChooseGame < PhysicsState
 	GameStates = {
-		'Test Zone #1'  => [SpaceGame::TestZone1, 48], #size 24, factor 2
-		'Turret Test'   => [SpaceGame::Tests::TurretTest, 24],
-		'Wormhole Test' => [SpaceGame::Tests::WormholeTest, 36],
-		'Static Test'   => [SpaceGame::Tests::StaticTest, 36],
+    #[state, size, cli shortcut]
+		'Test Zone #1'  => [SpaceGame::TestZone1, 48, 'TZ'], 
+		'Turret Test'   => [SpaceGame::Tests::TurretTest, 24, 'TT'],
+		'Wormhole Test' => [SpaceGame::Tests::WormholeTest, 36, 'WH'],
+		'Static Test'   => [SpaceGame::Tests::StaticTest, 36, 'ST'],
 #		'Thrust Test' => SpaceGame::Tests::ThrustTest, #not useful
-		'Asteroid test' => [SpaceGame::Tests::AsteroidTest, 36],
-		'Ship Test'     => [SpaceGame::Tests::ShipTest, 36],
-		'GrapplingTest' => [SpaceGame::Tests::GrapplingTest, 40],
+		'Asteroid test' => [SpaceGame::Tests::AsteroidTest, 36, 'AT'],
+		'Ship Test'     => [SpaceGame::Tests::ShipTest, 36, 'SS'],
+		'GrapplingTest' => [SpaceGame::Tests::GrapplingTest, 40, 'GT'],
+    'Hyper Tunnel Test' => [SpaceGame::Tests::HyperTunnelTest, 16, 'HT']
 	}
   include Tests::DebugGUI
   attr_reader :ready
@@ -27,7 +29,6 @@ class ChooseGame < PhysicsState
 			FloatyText.create name, 
         state[0], state[1], 
         opts.merge(
-          factor: state[2] || 1, 
           mass: opts[:mass]*(state[1]/48.0)
         )
 		}

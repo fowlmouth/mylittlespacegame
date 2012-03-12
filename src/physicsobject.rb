@@ -42,7 +42,7 @@ trait :sprite
         ]), vec2(0, 0))
       when :poly #unused ATM
         #expect @options[:verts] to be set up
-        CP::Shape::Poly.new(@body, CP.recenter_poly(@options[:verts]), @options[:verts][0])
+        CP::Shape::Poly.new(@body, CP.recenter_poly(@options[:verts]), vec2(0,0))
       else
         raise "Bad shape #{@options[:col_shape]}, wtf??"
       end
@@ -59,7 +59,9 @@ trait :sprite
 
   DebugColors = [
     Gosu::Color::RED, Gosu::Color::BLUE,
-    Gosu::Color::GREEN,Gosu::Color::YELLOW
+    Gosu::Color::GREEN,Gosu::Color::YELLOW,
+    Gosu::Color::GRAY,Gosu::Color::FUCHSIA,
+    Gosu::Color::WHITE,Gosu::Color::AQUA,
   ]
   def draw_debug()
     if @options[:col_shape] == :circle then
@@ -68,9 +70,14 @@ trait :sprite
       a = @body.a.radians_to_vec2
       @shape.num_verts.times { |v|
         point = @body.pos + @shape.vert(v).rotate(a)
-        $window.draw_circle point.x, point.y, 2, DebugColors[v]#::Chingu::DEBUG_COLOR#, 999
+        $window.draw_circle point.x, point.y, 2, DebugColors[v%8]#::Chingu::DEBUG_COLOR#, 999
       }
     end
+  end
+  
+  def verts()
+    return @shape.num_verts.times.map { |i| @shape.vert i } if [:poly, :rect].include? @options[:col_shape]
+    nil
   end
   
   def dead?() @dead end
@@ -129,47 +136,5 @@ trait :sprite
     #old:
     #@body.pos = vec2((x % @parent.game_area[0]), (y % @parent.game_area[1]))
   end
-
-#handles attached joints, constraints and such
-module Attachable
-  def initialize(opts={})
-    super opts
-    @attachments = []
-  end
-
-  def destroy()
-    @attachments.each { |s|
-      s[0].remove_from_space(@parent.space)
-      s[1].remove_attached(self, false)
-    } unless @attachments.empty?
-    @attachments = []
-    super
-  end
-
-  def add_attachment(spring, owner)
-    @attachments << [spring, owner]
-  end
-
-  def remove_attached(object, remove_from_space = true)
-    @attachments.delete_if { |a|
-      if a[1] == object
-        if remove_from_space 
-          a[0].remove_from_space(@parent.space)
-          a[1].remove_attached(self, false)
-        end  
-        true
-      else false end }
-  end
-  
-  def remove_last_attachment()
-    remove_attached(@attachments.last[1]) unless @attachments.empty?
-  end
-
-  def has_attached?(obj = nil)
-    obj.nil?                 ?
-      !@attachments.empty?   :
-      @attachments.find{|a| a[1] == obj}
-  end
-end
 end
 end

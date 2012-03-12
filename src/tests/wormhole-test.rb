@@ -67,8 +67,7 @@ class WormholeTest < PhysicsState
     
     @space.add_collision_func(:asteroid, :wormhole, &p)
     @space.add_collision_func(:ship, :wormhole, &p)
-    @space.add_collision_func(:EnemyBullet, :wormhole, &p)
-    @space.add_collision_func(:PlayerBullet, :wormhole, &p)
+    @space.add_collision_func(:bullet, :wormhole, &p)
     
     super
   end
