@@ -12,6 +12,7 @@ trait :sprite
       col_type: :blah, 
       col_shape: :circle, 
       mass: 10,
+      max_velocity: 35,#10,
       zorder: ZOrder::OBJECTS
     }.merge options
     super options
@@ -23,8 +24,9 @@ trait :sprite
   
   def init_physics #x, y, width, shape, mass
     unless @body 
-      @body = CP::Body.new(@options[:mass], 150.0)
+      @body = CP::Body.new(@options[:mass], @options.has_key?(:moment_inertia) ? @options[:moment_inertia] : 150.0)
       @body.p = CP::Vec2.new(@options[:x], @options[:y])
+      @body.v_limit = @options[:max_velocity]
       @body.vel = @options[:vel] if @options[:vel]
       @body.vel *= @options[:force] if @options[:force]
     end
@@ -76,8 +78,9 @@ trait :sprite
   end
   
   def verts()
-    return @shape.num_verts.times.map { |i| @shape.vert i } if [:poly, :rect].include? @options[:col_shape]
-    nil
+    @verts ||= ([:poly, :rect].include?(@options[:col_shape]) \
+      ? @shape.num_verts.times.map { |i| @shape.vert i }    \
+      : nil) #yes this will set to nil every time its ran on a circle, so you shouldn't call it on a circle <3
   end
   
   def dead?() @dead end
@@ -87,7 +90,7 @@ trait :sprite
 #     wrap_pos
 #   end
   
-  def reset_forces() @body.reset_forces() end
+  def reset_forces() @body.reset_forces(); @body.w *= 0.98 end
   
   #default for non-attachable objects, overwritten by Attachable module
   def has_attached?(o=nil) nil end
@@ -116,10 +119,10 @@ trait :sprite
       else #assume vec2
         @body.p = x
       end
-      return if silent
     else
       @body.p = CP::Vec2.new(rand(@parent.game_area[0]), rand(@parent.game_area[1]))
     end
+    return if silent
     anim = Bullet.animation(file: 'warpPorter_128x128.png', delay: 60-(@body.vel.dist(CP::Vec2.new(0, 0))))
     Explosion.create x: @body.p.x, y: @body.p.y, anim: anim, zorder: ZOrder::OBJECTS-1
     @parent.push_sound Gosu::Sound['warpin2.wav'], @body.p

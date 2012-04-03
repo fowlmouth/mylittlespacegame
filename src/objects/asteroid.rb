@@ -87,9 +87,9 @@ class Asteroid < PhysicsObject
   def init_physics
     super
     #binding.pry
-    @body.velocity_func do |body, gravity, damping, dt|
-      body.update_velocity(gravity, 1.0, dt)
-    end
+    #@body.velocity_func do |body, gravity, damping, dt|
+    #  body.update_velocity(gravity, 1.0, dt)
+    #end
     
     if !@options[:moving] || @options[:moving] == false
       @body.vel = rand(360).degrees_to_radians.radians_to_vec2 * rand(3..5)
@@ -100,7 +100,7 @@ class Asteroid < PhysicsObject
   end
   
   def draw
-    (@anim.next).draw_rot x, y, 100, 0, @center_x, @center_y
+    (@anim.next).draw_rot x, y, 100, angle_gosu, @center_x, @center_y
     #$window.draw_circle *@body.pos, @shape.radius, ::Chingu::DEBUG_COLOR, 999
     # r = @health/@max_health
     #r < 0 ?

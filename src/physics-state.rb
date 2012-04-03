@@ -9,7 +9,7 @@ class PhysicsState < Chingu::GameState
   def initialize options={}
     super options
     @space = CP::Space.new
-    @space.damping = 0.85
+    @space.damping = 1.0 ## 0.85
     
     @space.add_collision_func(:ship, :ship, &nil)
     

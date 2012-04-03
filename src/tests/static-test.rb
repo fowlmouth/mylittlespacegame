@@ -63,10 +63,13 @@ class StaticTest < PhysicsState
         switch_tile(1)
       },
     } 
-    StaticObject.create tile: :nw, x: 0, y: 0
-    StaticObject.create tile: :ne, x: game_area[0]-32, y: 0
-    StaticObject.create tile: :se, x: game_area[0]-32, y: game_area[1]-32
-    StaticObject.create tile: :sw, x: 0, y: game_area[1]-32
+    StaticObject.create tile: :nw, x: 32, y: 6*16
+    #StaticObject.create tile: :ne, x: game_area[0]-32, y: 0
+    #StaticObject.create tile: :se, x: game_area[0]-32, y: game_area[1]-32
+    #StaticObject.create tile: :sw, x: 0, y: game_area[1]-32
+    StaticObject.create tile: :ne, x: 64, y: 6*16
+    StaticObject.create tile: :se, x: 96, y: 6*16
+    StaticObject.create tile: :sw, x: 96+32, y: 6*16
     
     Terrain.create id: :t1, x: 16*4, y: 16*8, width: 16*3, height: 16
     
@@ -115,7 +118,9 @@ class StaticTest < PhysicsState
     #create a poly according to @points
     return unless points_are_valid?
     x, y = *@points[0][0]
-    po = PolyObject.create x: x, y: y, verts: verts
+    
+    po = PolyObject.create x: x, y: y, verts: verts, reset_me: true
+    #po.warp po.x - po.verts[0].x, po.y - po.verts[0].y
     @points = []
     @validtxt && @validtxt.text = ''
   end
@@ -123,6 +128,10 @@ class StaticTest < PhysicsState
   class PolyObject < PhysicsObject
     def initialize(opts = {})
       super opts.merge(col_type: :blah, col_shape: :poly, angle: 180)
+      
+      if opts[:reset_me] #move obj relative to the first point (otherwise the center becomes 0,0 and it gets placed weird
+        warp x - verts[0].x, y - verts[0].y, true
+      end
     end
     
     def draw() super;draw_debug end

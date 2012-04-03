@@ -25,6 +25,8 @@ W_LIMIT = 0.5 # limits the rotational velocity
       col_type: :ship,
       col_shape: :circle,
       mass: 10.0,
+      moment_inertia: 50.0,
+      max_velocity: 35,
       slots: [],
       energy_rate: 150/30,
       inv: [],
